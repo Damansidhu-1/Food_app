@@ -5,7 +5,7 @@ import { useUserStore } from "@/store/useUserStore";
 import { Separator } from "@radix-ui/react-separator";
 import { Loader2, LockKeyhole, Mail } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // there are 2 ways to define type in typeScript
 // 1st
@@ -32,6 +32,7 @@ const Login = () => {
 
   const [errors, setErrors] = useState<Partial<LoginInputState>>({});
   const {login, loading} = useUserStore();
+  const navigate = useNavigate();
 
   const changeEventHandler =  (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -47,7 +48,11 @@ const Login = () => {
       return;
     }
     // api implementation start here
-    await login(input);
+    try {
+      await login(input);
+      navigate("/");
+    } catch (error) {console.log(error);
+    }
     // console.log(input);
   };
 
