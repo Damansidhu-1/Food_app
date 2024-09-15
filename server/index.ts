@@ -1,10 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./db/connectDB";
-import userRoute from "./routes/user.route"
+
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+
+import userRoute from "./routes/user.route"
+import restaurantRoute from "./routes/restaurant.route"
+import menuRoute from "./routes/menu.route"
+import orderRoute from "./routes/order.route"
+
 const app = express();
 
 dotenv.config();
@@ -22,6 +28,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/user", restaurantRoute);
+app.use("/api/v1/menu", menuRoute);
+app.use("/api/v1/order", orderRoute);
 
 app.listen(PORT, () => {
     connectDB();
