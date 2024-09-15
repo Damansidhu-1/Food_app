@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SignupInputState, userSigupSchema } from "@/schema/userSchema";
+import { useUserStore } from "@/store/useUserStore";
 import { Separator } from "@radix-ui/react-separator";
 import { Loader2, LockKeyhole, Mail, Phone, User } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -10,7 +11,7 @@ import { Link } from "react-router-dom";
 
 // now Zod can also provide type so no need of type
 // type SignupInputState = {
-//   fullName: string;
+//   fullname: string;
 //   email: string;
 //   password: string;
 //   contact: string;
@@ -18,20 +19,20 @@ import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [input, setInput] = useState<SignupInputState>({
-    fullName: "",
+    fullname: "",
     email: "",
     password: "",
     contact: "",
   });
 
   const [errors, setErrors] = useState<Partial<SignupInputState>>({ });
-
+  const {signup, loading} = useUserStore();
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
-  const signupSubmitHandler = (e: FormEvent) => {
+  const signupSubmitHandler = async (e: FormEvent) => {
     e.preventDefault();
     // form validation starts using zod
     const result = userSigupSchema.safeParse(input);
@@ -41,10 +42,11 @@ const Signup = () => {
       return;
     }
     // api implementation start here
-    console.log(input);
+    await signup(input);
+    // console.log(input);
   };
 
-  const loading = false;
+  // const loading = false;
   return (
     <div className="flex items-center justify-center min-h-screen w-screen">
       <form
@@ -59,13 +61,13 @@ const Signup = () => {
             <Input
               type="text"
               placeholder="Full Name"
-              name="fullName"
-              value={input.fullName}
+              name="fullname"
+              value={input.fullname}
               onChange={changeEventHandler}
               className="pl-10 focus-visible:ring-1"
             />
             <User className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-            {errors && <span className="text-sm text-red-500">{errors.fullName}</span>}
+            {errors && <span className="text-sm text-red-500">{errors.fullname}</span>}
           </div>
         </div>
         <div className="mb-4">
