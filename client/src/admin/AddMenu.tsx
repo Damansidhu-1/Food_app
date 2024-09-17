@@ -13,18 +13,20 @@ import { Label } from "@/components/ui/label";
 import { Loader2, Plus } from "lucide-react";
 import React, { FormEvent, useState } from "react";
 
-import Image from "@/assets/hero_pizza.png"
+// import Image from "@/assets/hero_pizza.png";
 import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
 import EditMenu from "./EditMenu";
- 
-const menus = [
-    {
-        title:"Biriyani",
-        description:"Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
-        price:"80",
-        image:Image
-    }
-] 
+import { useMenuStore } from "@/store/useMenuStore";
+import { useRestaurantStore } from "@/store/useRestaurantStore";
+
+// const menus = [
+//   {
+//     title: "Biriyani",
+//     description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+//     price: "80",
+//     image: Image,
+//   },
+// ];
 
 const AddMenu = () => {
   const [input, setInput] = useState<MenuFormSchema>({
@@ -37,7 +39,9 @@ const AddMenu = () => {
   const [editOpen, setEditOpen] = useState<boolean>(false);
   const [selectedMenu, setSelectedMenu] = useState<any>();
   const [error, setError] = useState<Partial<MenuFormSchema>>({});
-  const loading:boolean = false
+  const { loading, createMenu } = useMenuStore();
+  const { restaurant } = useRestaurantStore();
+  // const loading:boolean = false
 
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
@@ -53,8 +57,18 @@ const AddMenu = () => {
       return;
     }
     // api ka kaam start from here
-    
-   
+    try {
+      const formData = new FormData();
+      formData.append("name", input.name);
+      formData.append("description", input.description);
+      formData.append("price", input.price.toString());
+      if (input.image) {
+        formData.append("image", input.image);
+      }
+      await createMenu(formData);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="max-w-6xl mx-auto my-10">
@@ -156,7 +170,7 @@ const AddMenu = () => {
           </DialogContent>
         </Dialog>
       </div>
-      {menus.map((menu: any, idx: number) => (
+      {restaurant.menus.map((menu: any, idx: number) => (
         <div key={idx} className="mt-6 space-y-4">
           <div className="flex flex-col md:flex-row md:items-center md:space-x-4 md:p-4 p-2 shadow-md rounded-lg border">
             <img
@@ -166,7 +180,7 @@ const AddMenu = () => {
             />
             <div className="flex-1">
               <h1 className="text-lg font-semibold text-gray-800">
-              {menu.name}
+                {menu.name}
               </h1>
               <p className="text-sm tex-gray-600 mt-1">{menu.description}</p>
               <h2 className="text-md font-semibold mt-2">
