@@ -27,7 +27,7 @@ export type RestaurantState = {
     restaurant: Restaurant | null;
     searchedRestaurant: SearchedRestaurant | null;
     appliedFilter: string[];
-    // singleRestaurant:  null,
+    singleRestaurant: Restaurant | null,
     // restaurantOrder:Orders[],
     createRestaurant: (formData: FormData) => Promise<void>;
     getRestaurant: () => Promise<void>;
@@ -37,7 +37,7 @@ export type RestaurantState = {
     updateMenuToRestaurant: (menu: any) => void;
     setAppliedFilter: (value: string) => void;
     resetAppliedFilter: () => void;
-    // getSingleRestaurant: (restaurantId:string) => Promise<void>;
+    getSingleRestaurant: (restaurantId:string) => Promise<void>;
     // getRestaurantOrders: () => Promise<void>;
     // updateRestaurantOrder: (orderId:string, status:string) => Promise<void>;
 }
