@@ -2,18 +2,18 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware"
 import axios from "axios";
 import { toast } from "sonner";
+import { RestaurantState } from "@/types/restaurantType";
 
 const API_END_POINT = "http://localhost:8000/api/v1/restaurant"
 axios.defaults.withCredentials = true;
 
-// type RestaurantState = {
 
-// }
 
-export const useRestaurantStore = create<any>()(persist((set) => ({
+export const useRestaurantStore = create<RestaurantState>()(persist((set) => ({
     loading: false,
     restaurant: null,
     searchedRestaurant: null,
+    appliedFilter: [],
     createRestaurant: async (formData: FormData) => {
         try {
             set({ loading: true });
@@ -72,6 +72,7 @@ export const useRestaurantStore = create<any>()(persist((set) => ({
 
             // await new Promise((resolve) => setTimeout(resolve, 2000));
             const response = await axios.get(`${API_END_POINT}/search/${searchText}?${params.toString()}`);
+            // console.log(response.data);
             if (response.data.success) {
                 set({ loading: false, searchedRestaurant: response.data });
             }
@@ -98,6 +99,13 @@ export const useRestaurantStore = create<any>()(persist((set) => ({
             }
             // if state.restaruant is undefined then return state
             return state;
+        })
+    },
+    setAppliedFilter: (value: string) => {
+        set((state) => {
+            const isAlreadyApplied = state.appliedFilter.includes(value);
+            const updatedFilter = isAlreadyApplied ? state.appliedFilter.filter((item) => item !== value) : [...state.appliedFilter, value];
+            return { appliedFilter: updatedFilter }
         })
     },
 }), {
