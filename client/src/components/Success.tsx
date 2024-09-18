@@ -22,6 +22,7 @@ const Success = () => {
           <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200">
             Order Status:{" "}
             <span className="text-[#FF5A5A]">{"confirm".toUpperCase()}</span>
+            <p className="text-sm font-semibold text-gray-400 dark:text-gray-300 mb-4">This is a dummy page. <br/> This functionality will come soon....</p>
           </h1>
         </div>
         <div className="mb-6">
