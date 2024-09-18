@@ -46,7 +46,7 @@ export const signup = async (req: Request, res: Response) => {
         });
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return res.status(500).json({
             success: false,
             message: "Internal server error"
@@ -83,7 +83,7 @@ export const login = async (req: Request, res: Response) => {
             user: userWithoutPassword
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json({ message: "Internal server error" })
     }
 };
@@ -114,7 +114,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
             user,
         })
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json({ message: "Internal server error" })
     }
 };
@@ -126,7 +126,7 @@ export const logout = async (req: Request, res: Response) => {
             message: "Logged out successfully."
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json({ message: "Internal server error" })
     }
 };
@@ -158,7 +158,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
             message: "Password reset link sent to your email"
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         return res.status(500).json({ message: "Internal server error" });
     }
 };
@@ -188,7 +188,7 @@ export const resetPassword = async (req: Request, res: Response) => {
             message: "Password reset successfully."
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         return res.status(500).json({ message: "Internal server error" });
     }
 };
@@ -208,7 +208,7 @@ export const checkAuth = async (req: Request, res: Response) => {
             user
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         return res.status(500).json({ message: "Internal server error" });
     }
 };
@@ -230,7 +230,7 @@ export const updateProfile = async (req: Request, res: Response) => {
             message:"Profile updated successfully"
         });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         return res.status(500).json({ message: "Internal server error" });
     }
 };

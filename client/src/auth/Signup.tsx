@@ -47,12 +47,10 @@ const Signup = () => {
       await signup(input);
       navigate("/verify-email");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
-    // console.log(input);
   };
 
-  // const loading = false;
   return (
     <div className="flex items-center justify-center min-h-screen w-screen">
       <form

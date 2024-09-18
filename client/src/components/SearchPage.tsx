@@ -25,7 +25,6 @@ const SearchPage = () => {
 
   useEffect(() => {
     searchRestaurant(params.text!, searchQuery, appliedFilter);
-    // console.log(searchedRestaurant)
   }, [params.text!, appliedFilter]);
   return (
     <div className="max-w-7xl mx-auto my-10">

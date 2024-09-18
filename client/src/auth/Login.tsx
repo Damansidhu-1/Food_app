@@ -51,12 +51,11 @@ const Login = () => {
     try {
       await login(input);
       navigate("/");
-    } catch (error) {console.log(error);
+    } catch (error) {
+      // console.log(error);
     }
-    // console.log(input);
   };
 
-  // const loading = false;
   return (
     <div className="flex items-center justify-center min-h-screen w-screen">
       <form

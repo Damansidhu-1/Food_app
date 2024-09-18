@@ -73,7 +73,6 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set) => ({
 
             // await new Promise((resolve) => setTimeout(resolve, 2000));
             const response = await axios.get(`${API_END_POINT}/search/${searchText}?${params.toString()}`);
-            // console.log(response.data);
             if (response.data.success) {
                 set({ loading: false, searchedRestaurant: response.data });
             }
