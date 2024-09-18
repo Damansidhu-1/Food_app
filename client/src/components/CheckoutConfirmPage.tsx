@@ -9,12 +9,12 @@ import {
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { Loader2 } from "lucide-react";
+// import { Loader2 } from "lucide-react";
 import { useUserStore } from "@/store/useUserStore";
 // import { CheckoutSessionRequest } from "@/types/orderType";
-import { useCartStore } from "@/store/useCartStore";
-import { useRestaurantStore } from "@/store/useRestaurantStore";
-import { useOrderStore } from "@/store/useOrderStore";
+// import { useCartStore } from "@/store/useCartStore";
+// import { useRestaurantStore } from "@/store/useRestaurantStore";
+// import { useOrderStore } from "@/store/useOrderStore";
 
 const CheckoutConfirmPage = ({
   open,
@@ -34,9 +34,9 @@ const CheckoutConfirmPage = ({
     city: user?.city || "",
     country: user?.country || "",
   }); 
-  const { cart } = useCartStore();
-  const { restaurant } = useRestaurantStore();
-  const { createCheckoutSession, loading } = useOrderStore();
+  // const { cart } = useCartStore();
+  // const { restaurant } = useRestaurantStore();
+  // const { createCheckoutSession, loading } = useOrderStore();
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
@@ -131,16 +131,11 @@ const CheckoutConfirmPage = ({
             />
           </div>
           <DialogFooter className="col-span-2 pt-5">
-            {loading ? (
-              <Button disabled className="bg-orange hover:bg-hoverOrange">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-              </Button>
-            ) : (
+            
               <Button className="bg-orange hover:bg-hoverOrange">
                 Continue To Payment
               </Button>
-            )}
+            
           </DialogFooter>
         </form>
       </DialogContent>
