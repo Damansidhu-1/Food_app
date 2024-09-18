@@ -49,7 +49,7 @@ export const useUserStore = create<UserState>()(persist((set) => ({
                 }
             });
             if (response.data.success) {
-                console.log(response.data);
+                // console.log(response.data);
                 toast.success(response.data.message);
                 set({ loading: false, user: response.data.user, isAuthenticated: true });
             }
@@ -67,7 +67,7 @@ export const useUserStore = create<UserState>()(persist((set) => ({
                 }
             });
             if (response.data.success) {
-                console.log(response.data);
+                // console.log(response.data);
                 toast.success(response.data.message);
                 set({ loading: false, user: response.data.user, isAuthenticated: true });
             }
