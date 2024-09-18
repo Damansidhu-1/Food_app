@@ -1,7 +1,7 @@
 # Node.js dependencies
 node_modules/
 node_modules
-package-lock.json
+# package-lock.json
 npm-debug.log
 yarn.lock
 .pnpm-debug.log
