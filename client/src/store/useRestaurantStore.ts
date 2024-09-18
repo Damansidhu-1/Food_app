@@ -108,6 +108,9 @@ export const useRestaurantStore = create<RestaurantState>()(persist((set) => ({
             return { appliedFilter: updatedFilter }
         })
     },
+    resetAppliedFilter: () => {
+        set({ appliedFilter: [] })
+    },
 }), {
     name: 'restaurant-name',
     storage: createJSONStorage(() => localStorage)
