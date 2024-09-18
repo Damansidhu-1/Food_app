@@ -38,9 +38,11 @@ import {
 } from "./ui/sheet";
 import { Separator } from "./ui/separator";
 import { useUserStore } from "@/store/useUserStore";
+import { useCartStore } from "@/store/useCartStore";
 
 const Navbar = () => {
   const { user, loading, logout } = useUserStore();
+  const { cart } = useCartStore();
   // const admin: boolean = true;
   // const loading: boolean = false;
   return (
@@ -92,16 +94,18 @@ const Navbar = () => {
           </div>
           <Link to="/cart" className="relative cursor-pointer">
             <ShoppingCart />
+            {cart.length > 0 && (
             <Button
               size={"icon"}
               className="absolute -inset-y-3 left-2 text-xs rounded-full h-4 w-4 bg-red-500"
             >
-              5
+              {cart.length}
             </Button>
+            )}
           </Link>
           <div>
             <Avatar>
-              <AvatarImage src="" />
+              <AvatarImage src={user?.profilePicture} alt="Profile Picture" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </div>
@@ -210,7 +214,7 @@ const MobileNavbar = () => {
         <SheetFooter className="flex flex-col gap-5">
           <div className="flex items-center gap-2">
             <Avatar>
-              <AvatarImage />
+              <AvatarImage src={user?.profilePicture} alt="Profile Picture" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <h1 className="font-bold">Daman Sidhu</h1>

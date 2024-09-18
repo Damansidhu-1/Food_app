@@ -10,6 +10,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
+import { useUserStore } from "@/store/useUserStore";
 
 const CheckoutConfirmPage = ({
   open,
@@ -19,13 +20,14 @@ const CheckoutConfirmPage = ({
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const loading: boolean = false;
+  const {user} = useUserStore();
   const [input, setInput] = useState({
-    name: "",
-    email: "",
-    contact: "",
-    address: "",
-    city: "",
-    country: "",
+    name: user?.fullname || "",
+    email: user?.email || "",
+    contact: user?.contact || "",
+    address: user?.address || "",
+    city: user?.city || "",
+    country: user?.country || "",
   });
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,8 +37,9 @@ const CheckoutConfirmPage = ({
   const checkoutHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // will implement api here 
-    console.log(input);
-  };
+    // console.log(input);
+    
+  }; 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
